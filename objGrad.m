@@ -4,7 +4,8 @@ function [obj G] = ObjGrad(X,A)
 
     dim = size(A,1);
     
-    weight = [1:dim];
+    weight = [1:dim]; % origin
+    weight = [dim:-1:1]; % 2_DecByOne
     W = diag(weight);
 
     B = X*A;

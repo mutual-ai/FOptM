@@ -8,9 +8,6 @@ A = fvecs_read('/home/master/01/r01922165/zzzzz/Dataset/Image/ANN_SIFT1M/sift/si
 
 dim = size(A,1);
 N = size(A,2);
-return
-M = 500;
-nSeg = 200;
 
 rand('seed',304);
 randn('seed',304);
@@ -21,6 +18,11 @@ opts.xtol = 1e-5;
 opts.gtol = 1e-5;
 opts.ftol = 1e-8;
 fun = @objGrad; 
+M = 500;
+nSeg = 200;
+
+WeightName = '2_DecByOne';
+SaveModelDir = ['../trans_ANN/Weights/' int2str(M) '_' int2str(nSeg) '/' WeightName '/'];
 
 for i=1:nSeg
     s = (i-1)*M+1;
@@ -32,7 +34,7 @@ for i=1:nSeg
     fprintf('\nOptM: obj: %7.6e, itr: %d, nfe: %d, cpu: %f, norm(XT*X-I): %3.2e \n', ...
              out.fval, out.itr, out.nfe, tsolve, norm(X'*X - eye(dim), 'fro') );
 
-    save(['../trans_ANN/X_' int2str(M) '_' int2str(i)], 'X');
+    save([ SaveModelDir 'X_'  int2str(M) '_' int2str(i)], 'X');
 end
 
 %{
