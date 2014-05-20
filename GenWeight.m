@@ -1,11 +1,12 @@
 function weight = GenWeight(Len)
     weight = zeros(1,Len);
     % 3_SimpleDiv
-    ratio = [10 20 30 40 50 60 70 80 90];
+    %ratio = [10 20 30 40 50 60 70 80 90];
     % 4_Double
     %ratio = [20 40 60 80] ;
-    % 5_Half 4:1:1:1
-    
+    % 5_Quad 4:1:1:1
+    ratio = [25 50 75];
+
     pivots = floor(ratio*Len/100);
     rank = size(ratio,2);
     r = 0;

@@ -21,8 +21,9 @@ fun = @objGrad;
 M = 500;
 nSeg = 200;
 
-WeightName = '3_SimpDiv';
-WeightName = '4_Half';
+WeightName = '3_SimpDiv'; % linux1
+WeightName = '4_Half';    % linux14
+WeightName = '5_Quad';    % linux7
 SaveModelDir = ['../trans_ANN/Weights/' int2str(M) '_' int2str(nSeg) '/' WeightName '/'];
 weight = GenWeight(dim);
 for i=1:nSeg
