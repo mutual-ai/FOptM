@@ -21,15 +21,16 @@ fun = @objGrad;
 M = 500;
 nSeg = 200;
 
-WeightName = '2_DecByOne';
+WeightName = '3_SimpDiv';
+WeightName = '4_Half';
 SaveModelDir = ['../trans_ANN/Weights/' int2str(M) '_' int2str(nSeg) '/' WeightName '/'];
-
+weight = GenWeight(dim);
 for i=1:nSeg
     s = (i-1)*M+1;
     e = s + M;
 
     X0 = orth(rand(dim,dim));
-    tic; [X, out]= OptStiefelGBB(X0, fun, opts, A(:,s:e)); tsolve = toc;
+    tic; [X, out]= OptStiefelGBB(X0, fun, opts, A(:,s:e),weight); tsolve = toc;
 
     fprintf('\nOptM: obj: %7.6e, itr: %d, nfe: %d, cpu: %f, norm(XT*X-I): %3.2e \n', ...
              out.fval, out.itr, out.nfe, tsolve, norm(X'*X - eye(dim), 'fro') );
