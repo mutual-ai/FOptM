@@ -24,11 +24,11 @@ WeightName = '4_Half';    % linux14
 WeightName = '5_Quad';    % linux7
 WeightName = '6_Half10';   % linux14
 WeightName = '7_HalfQuad';   % linux7
-WeightName = 'origin'
+WeightName = 'origin';
 
-M = 500;
-%nSeg = 200;
-nSegList = [300 400 500 600 700 800 900 1000 2000];
+M = 50000;
+nSegList = [20];
+%nSegList = [300 400 500 600 700 800 900 1000 2000];
 for nSeg = nSegList
     SaveModelDir = ['../trans_ANN/Weights/' int2str(M) '_' int2str(nSeg) '/' WeightName '/'];
     weight = GenWeight(dim);

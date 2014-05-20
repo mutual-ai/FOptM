@@ -1,8 +1,8 @@
 function weight = GenWeight(Len)
     weight = zeros(1,Len);
-    weight = [1:dim]; % origin
+    weight = [1:Len]; % origin
     return
-    %weight = [dim:-1:1]; % 2_DecByOne
+    %weight = [Len:-1:1]; % 2_DecByOne
     % 3_SimpleDiv
     %ratio = [10 20 30 40 50 60 70 80 90];
     % 4_Double
