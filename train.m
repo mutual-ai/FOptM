@@ -26,15 +26,15 @@ WeightName = '6_Half10';   % linux14
 WeightName = '7_HalfQuad';   % linux7
 WeightName = 'origin';
 
-M = 50000;
-nSegList = [20];
+M = 10000;
+nSegList = [10];
 %nSegList = [300 400 500 600 700 800 900 1000 2000];
 for nSeg = nSegList
     SaveModelDir = ['../trans_ANN/Weights/' int2str(M) '_' int2str(nSeg) '/' WeightName '/'];
     weight = GenWeight(dim);
     for i=1:nSeg
         s = (i-1)*M+1;
-        e = s + M;
+        e = s + M-1;
 
         X0 = orth(rand(dim,dim));
         tic; [X, out]= OptStiefelGBB(X0, fun, opts, A(:,s:e),weight); tsolve = toc;
