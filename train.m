@@ -26,8 +26,8 @@ WeightName = '6_Half10';   % linux14
 WeightName = '7_HalfQuad';   % linux7
 WeightName = 'origin';
 
-M = 10000;
-nSegList = [10];
+M = 200;
+nSegList = [5000];
 %nSegList = [300 400 500 600 700 800 900 1000 2000];
 for nSeg = nSegList
     SaveModelDir = ['../trans_ANN/Weights/' int2str(M) '_' int2str(nSeg) '/' WeightName '/'];
