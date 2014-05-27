@@ -19,19 +19,35 @@ opts.gtol = 1e-5;
 opts.ftol = 1e-8;
 fun = @objGrad; 
 
-WeightName = '3_SimpDiv'; % linux1
-WeightName = '4_Half';    % linux14
-WeightName = '5_Quad';    % linux7
-WeightName = '6_Half10';   % linux14
-WeightName = '7_HalfQuad';   % linux7
-WeightName = 'origin';
+WChoice = 9;
+switch WChoice
+    case 1
+        WeightName = 'origin';
+    case 3
+        WeightName = '3_SimpDiv'; % linux1
+    case 4
+        WeightName = '4_Half';    % linux14
+    case 5
+        WeightName = '5_Quad';    % linux7
+    case 6
+        WeightName = '6_Half10';   % linux14
+    case 7
+        WeightName = '7_HalfQuad';   % linux7
+    case 8
+        WeightName = '8_Dec';   % linux7
+    case 9
+        WeightName = '9_Five';   % linux7
+    otherwise
+        'WChoice error.'
+        exit
+end
 
 M = 200;
 nSegList = [5000];
 %nSegList = [300 400 500 600 700 800 900 1000 2000];
 for nSeg = nSegList
     SaveModelDir = ['../trans_ANN/Weights/' int2str(M) '_' int2str(nSeg) '/' WeightName '/'];
-    weight = GenWeight(dim);
+    weight = GenWeight(dim,WChoice);
     for i=1:nSeg
         s = (i-1)*M+1;
         e = s + M-1;

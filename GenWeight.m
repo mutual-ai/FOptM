@@ -1,18 +1,36 @@
-function weight = GenWeight(Len)
+function weight = GenWeight(Len, WChoice)
     weight = zeros(1,Len);
-    weight = [1:Len]; % origin
-    return
-    %weight = [Len:-1:1]; % 2_DecByOne
+    switch WChoice
+        case 1
+            weight = [1:Len]; % origin
+        case 2
+            weight = [Len:-1:1]; % 2_DecByOne
+        case 3
     % 3_SimpleDiv
-    %ratio = [10 20 30 40 50 60 70 80 90];
-    % 4_Double
-    %ratio = [20 40 60 80] ;
-    % 5_Quad 
-    %ratio = [25 50 75];
+            ratio = [10 20 30 40 50 60 70 80 90];
+        case 4
+        % 4_Double
+            ratio = [20 40 60 80] ;
+        case 5
+        % 5_Quad 
+            ratio = [25 50 75];
+        case 6
     % 6_Half10 
-    ratio = [50 60 70 80 90];
+            ratio = [50 60 70 80 90];
+        case 7
     % 7_HalfQuad 
-    ratio = [50 75];
+            ratio = [50 75];
+        case 8
+            % Dec
+            ratio = 10:10:90;
+        case 9
+            % Five
+            ratio = 5:5:95;
+
+        otherwise
+            'WChoice error'
+            exit
+    end
 
     pivots = floor(ratio*Len/100);
     rank = size(ratio,2);
