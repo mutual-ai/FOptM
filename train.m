@@ -2,8 +2,16 @@ clear
 clc
 format long
 %load '';
-A = fvecs_read('/home/master/01/r01922165/zzzzz/Dataset/Image/ANN_SIFT1M/sift/sift_base.fvecs');
+%A = fvecs_read('/home/master/01/r01922165/zzzzz/Dataset/Image/ANN_SIFT1M/sift/sift_base.fvecs');
 %A = data';
+DataDir = '/home/master/01/r01922165/zzzzz/Dataset/Image/Flickr/flickr/ParsedData/';
+FileName = {'1_ColorLayout192','2_ColorStruct256'};
+for i=1:size(FileName,2)
+    filename = [DataDir,FileName{i}]
+    load(filename)
+
+end
+return
 
 
 dim = size(A,1);
@@ -19,10 +27,12 @@ opts.gtol = 1e-5;
 opts.ftol = 1e-8;
 fun = @objGrad; 
 
-WChoice = 9;
+WChoice = 2;
 switch WChoice
     case 1
         WeightName = 'origin';
+    case 2
+        WeightName = '2_heur';
     case 3
         WeightName = '3_SimpDiv'; % linux1
     case 4
@@ -42,7 +52,7 @@ switch WChoice
         exit
 end
 
-M = 200;
+M = 200; % Num of instances on a single machine.
 nSegList = [5000];
 %nSegList = [300 400 500 600 700 800 900 1000 2000];
 for nSeg = nSegList
@@ -53,6 +63,10 @@ for nSeg = nSegList
         e = s + M-1;
 
         X0 = orth(rand(dim,dim));
+        if WChoice == 2
+            weight = cumsum(sum(A(:,s:e).*A(:,s:e),2));
+            weight = weight / max(weight);
+        end
         tic; [X, out]= OptStiefelGBB(X0, fun, opts, A(:,s:e),weight); tsolve = toc;
 
         fprintf('\nOptM: obj: %7.6e, itr: %d, nfe: %d, cpu: %f, norm(XT*X-I): %3.2e \n', ...

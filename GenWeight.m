@@ -3,8 +3,10 @@ function weight = GenWeight(Len, WChoice)
     switch WChoice
         case 1
             weight = [1:Len]; % origin
+            return
         case 2
-            weight = [Len:-1:1]; % 2_DecByOne
+            weight = [Len:-1:1]; % 2_heur
+            return
         case 3
     % 3_SimpleDiv
             ratio = [10 20 30 40 50 60 70 80 90];
