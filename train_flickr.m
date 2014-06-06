@@ -14,7 +14,8 @@ fun = @objGrad;
 DataDir = '/home/master/01/r01922165/zzzzz/Dataset/Image/Flickr/flickr/ParsedData/';
 FileName = {'1_ColorLayout192','2_ColorStruct256','3_ScalColor256','4_HomoText43','5_EdgeHist150'};
 
-for FeaFileNum=4:size(FileName,2)
+%for FeaFileNum=1:size(FileName,2)
+for FeaFileNum=3:5
     filename = [DataDir,FileName{FeaFileNum}];
     load(filename);
     A = data';
@@ -32,8 +33,8 @@ for FeaFileNum=4:size(FileName,2)
                 exit
         end
 
-        M = 500; % Num of instances on a single machine.
-        nSegList = [2000];
+        M = 200; % Num of instances on a single machine.
+        nSegList = [5000];
         for nSeg = nSegList
             %SaveModelDir = ['../trans_flickr/' int2str(FeaFileNum) '/' int2str(M) '_' int2str(nSeg) '/' WeightName '/'];
             SaveModelDir = ['../trans_flickr/' int2str(FeaFileNum) '_2/' int2str(M) '_' int2str(nSeg) '/' WeightName '/'];
