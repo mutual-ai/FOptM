@@ -2,16 +2,17 @@ clear
 clc
 format long
 %load '';
-%A = fvecs_read('/home/master/01/r01922165/zzzzz/Dataset/Image/ANN_SIFT1M/sift/sift_base.fvecs');
-%A = data';
-DataDir = '/home/master/01/r01922165/zzzzz/Dataset/Image/Flickr/flickr/ParsedData/';
-FileName = {'1_ColorLayout192','2_ColorStruct256'};
-for i=1:size(FileName,2)
-    filename = [DataDir,FileName{i}]
-    load(filename)
+A = fvecs_read('/home/master/01/r01922165/zzzzz/Dataset/Image/ANN_SIFT1M/sift/sift_base.fvecs');
 
-end
-return
+clear data
+%DataDir = '/home/master/01/r01922165/zzzzz/Dataset/Image/Flickr/flickr/ParsedData/';
+%FileName = {'1_ColorLayout192','2_ColorStruct256'};
+%for i=1:size(FileName,2)
+%    filename = [DataDir,FileName{i}]
+%    load(filename)
+
+%end
+%return
 
 
 dim = size(A,1);
@@ -20,15 +21,17 @@ N = size(A,2);
 rand('seed',304);
 randn('seed',304);
 
-opts.record = 10;
+%opts.record = 10;
 opts.mxitr  = 1e+7;
 opts.xtol = 1e-5;
 opts.gtol = 1e-5;
 opts.ftol = 1e-8;
 fun = @objGrad; 
 
-WChoice = 2;
+WChoice = 0;
 switch WChoice
+    case 0
+        WeightName = 'k09';
     case 1
         WeightName = 'origin';
     case 2
@@ -59,6 +62,7 @@ for nSeg = nSegList
     SaveModelDir = ['../trans_ANN/Weights/' int2str(M) '_' int2str(nSeg) '/' WeightName '/'];
     weight = GenWeight(dim,WChoice);
     for i=1:nSeg
+        nn = i
         s = (i-1)*M+1;
         e = s + M-1;
 
