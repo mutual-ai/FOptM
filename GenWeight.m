@@ -1,6 +1,13 @@
 function weight = GenWeight(Len, WChoice)
     weight = zeros(1,Len);
     switch WChoice
+        case 0
+            base = 1.0;
+            for i = 1:Len
+                weight(i) = base;
+                base = base/0.9;
+            end
+            return
         case 1
             weight = [1:Len]; % origin
             return
